@@ -1,0 +1,203 @@
+<div *ngIf="kullaniciForm" class="mt-1">
+  <div class="col-xl-12 ">
+    <mat-card>
+      <mat-card-title>
+        <h6 class=" text-center  ">
+          Kullanıcı Güncelleme Sayfası
+          <hr />
+        </h6>
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="kullaniciForm" (ngSubmit)="editKullanici()">
+          <div class="form-group">
+            <input
+              type="hidden"
+              name="kullaniciId"
+              formControlName="kullaniciId"
+              class="form-control"
+              required
+            />
+          </div>
+         
+          <div class="form-group">
+            <input
+              type="hidden"
+              name="durum"
+              formControlName="durum"
+              class="form-control"
+              required
+            />
+          </div>
+<div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Adı Soyadı</label>
+              <input
+                type="text"
+                [ngClass]="{ 'is-invalid': submitted && f.adiSoyadi.errors }"
+                name="adiSoyadi"
+                formControlName="adiSoyadi"
+                class="form-control"
+                autofocus
+              />
+              <div
+                *ngIf="submitted && f.adiSoyadi.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.adiSoyadi.errors.required">
+                  Ad soyad boş geçilemez
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <span>Kullanıcı Adı</span>
+              <input
+                type="text"
+                [ngClass]="{
+                  'is-invalid': submitted && f.kullaniciAdi.errors
+                }"
+                name="kullaniciAdi"
+                formControlName="kullaniciAdi"
+                class="form-control"
+                autofocus
+              />
+              <div
+                *ngIf="submitted && f.kullaniciAdi.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.kullaniciAdi.errors.required">
+                  Kullanıcı adı boş geçilemez
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <span>Şifre</span>
+              <input
+                type="password"
+                [ngClass]="{ 'is-invalid': submitted && f.sifre.errors }"
+                name="sifre"
+                formControlName="sifre"
+                class="form-control"
+              />
+              <div
+                *ngIf="submitted && f.sifre.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.sifre.errors.required">
+                  Şifre boş geçilemez.
+                </div>
+                <div *ngIf="f.sifre.errors.minlength">
+                  Şifre en az 5 karakter olmalı
+                </div>
+                <div *ngIf="f.sifre.errors.maxlength">
+                  Şifre en fazla 10 karakter olmalı
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <span>Email</span>
+              <input
+                type="text"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                autofocus
+              />
+              <div
+                *ngIf="submitted && f.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.email.errors.required">
+                  Email boş geçilemez.
+                </div>
+                <div *ngIf="f.email.errors.email">
+                  Email formatını doğru giriniz.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Telefon</label>
+              <input
+                type="number"
+                min="10"
+                max="12"
+                [ngClass]="{ 'is-invalid': submitted && f.telefon.errors }"
+                name="telefon"
+                formControlName="telefon"
+                class="form-control"
+                required
+              />
+              <div
+                *ngIf="submitted && f.telefon.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.telefon.errors.required">
+                  Telefon boş geçilemez.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <span>Adres</span>
+              <textarea
+                type="text"
+                [ngClass]="{ 'is-invalid': submitted && f.adres.errors }"
+                name="adres"
+                formControlName="adres"
+                class="form-control"
+                rows="2"
+                required
+              ></textarea>
+              <div *ngIf="submitted && f.adres.errors" 
+              class="invalid-feedback">
+                <div *ngIf="f.adres.errors.required">
+                  Kullanıcı adresi boş geçilemez.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+          <div>
+            <br />
+            <button
+            mat-raised-button
+            class="btn btn-outline-danger pull-right ml-2 "
+            type="button"
+            (click)="firmaListesineGit()"
+          >
+            Vazgeç
+          </button>
+            <button
+              mat-raised-button
+              class="btn btn-outline-secondary pull-right"
+              type="submit"
+            >
+              Kaydet
+            </button>
+          </div>
+          <br />
+          <br />
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+ 

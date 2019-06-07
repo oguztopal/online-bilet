@@ -1,0 +1,98 @@
+<div class="inventory-body ">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="col-sm-4 offset-sm-4 " >
+      <mat-card style="margin:20px; border-radius: 20px; box-shadow: 5px 5px 15px;">
+        <mat-card-title>
+          <h5 class="card-title text-center">Giriş Sayfası</h5>
+          <hr />
+        </mat-card-title>
+        <mat-card-content>
+            <form  [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+              <label>Kullanıcı Adı</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-user"></i
+                  ></span>
+                </div>
+                <input type="text" formControlName="kullaniciAdi" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.kullaniciAdi.errors }" />
+          <div *ngIf="submitted && f.kullaniciAdi.errors" class="invalid-feedback">
+            <div *ngIf="f.kullaniciAdi.errors.required">Kullanici Adı boş bırakılamaz.</div>
+          </div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label>Şifre</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon2"
+                    ><i class="fa fa-key"></i
+                  ></span>
+                </div>
+                <input type="password" formControlName="sifre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sifre.errors }" />
+          <div *ngIf="submitted && f.sifre.errors" class="invalid-feedback">
+            <div *ngIf="f.sifre.errors.required">Şifre Boş Bırakılamaz</div>
+          </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <button
+                mat-raised-button
+                type="submit"
+                class="btn btn-outline-secondary pull-right"
+                [disabled]="!loginForm.valid"
+              >
+                Login
+              </button>
+              <div class="col-md-12">
+                <button
+           (click)="registeraGit()"
+                  mat-raised-button
+                  type="button"
+                  class="btn btn-outline-info pull-right"
+                
+                >
+                  Üye Ol
+                </button>
+              </div>
+            </div>
+            <br /><br />
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+   
+  </div>
+  
+  
+   <!-- <div class="col-md-6 offset-3">
+      <form  [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="form-group">
+          <label >Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="loading" type="submit" class="btn btn-primary">Login</button>
+          <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <a [routerLink]="['/register']" class="btn btn-default">Register</a>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+      </form>
+    </div> -->

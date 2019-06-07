@@ -1,0 +1,154 @@
+<div class=" container">
+  <div class="col-md-8 offset-md-2">
+    <div class="card  border-secondary mt-5">
+      <div class="card-header" style="background-color: #5e5858;">
+        <h5 class="card-title text-center text-white">Kullanıcı Ekleme Sayfası</h5>
+      </div>
+      <div class="card-body">
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="register()"
+          class="form-register"
+        >
+        <div class="row">
+          <div class="col-md 6">
+              <div class="form-group">
+                  <label>Adı Soyadı</label>
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.adSoyad.errors }"
+                    name="adSoyad"
+                    formControlName="adSoyad"
+                    class="form-control"
+                    autofocus
+                  />
+                  <div
+                    *ngIf="submitted && f.adSoyad.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.adSoyad.errors.required">
+                      Ad soyad boş geçilemez
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-md 6">
+              <div class="form-group">
+                  <span>Kullanıcı Adı</span>
+                  <input
+                    type="text"
+                    [ngClass]="{ 'is-invalid': submitted && f.kullaniciAdi.errors }"
+                    name="kullaniciAdi"
+                    formControlName="kullaniciAdi"
+                    class="form-control"
+                    autofocus
+                  />
+                  <div *ngIf="submitted && f.kullaniciAdi.errors" class="invalid-feedback">
+                    <div *ngIf="f.kullaniciAdi.errors.required">
+                      Kullanıcı adı boş geçilemez
+                    </div>
+                  </div>
+                </div>
+           </div>
+        </div>
+     
+        <div class="row">
+            <div class="col-md 6">
+                <div class="form-group">
+                    <span>Email</span>
+                    <input
+                      type="text"
+                      [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                      name="email"
+                      formControlName="email"
+                      class="form-control"
+                      autofocus
+                    />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Email boş geçilemez.</div>
+                      <div *ngIf="f.email.errors.email">
+                        Email formatını doğru giriniz.
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md 6">
+                <div class="form-group">
+                    <span> Adres</span>
+                    <input
+                      type="text"
+                      [ngClass]="{ 'is-invalid': submitted && f.adres.errors }"
+                      name="adres"
+                      formControlName="adres"
+                      class="form-control"
+                      autofocus
+                    />
+                    <div *ngIf="submitted && f.adres.errors" class="invalid-feedback">
+                      <div *ngIf="f.adres.errors.required">Adres boş geçilemez.</div>
+                    </div>
+                  </div>
+             </div>
+        </div>
+        <div class="row">
+            <div class="col-md 6">
+                <div class="form-group">
+                    <span>Telefon</span>
+                    <input
+                      type="text"
+                      [ngClass]="{ 'is-invalid': submitted && f.telefon.errors }"
+                      name="telefon"
+                      formControlName="telefon"
+                      class="form-control"
+                      autofocus
+                    />
+                    <div *ngIf="submitted && f.telefon.errors" class="invalid-feedback">
+                      <div *ngIf="f.telefon.errors.required">
+                        Telefon boş geçilemez.
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+          <div class="row">
+            <div class="col-md-6">
+    
+                <div class="form-group">
+                    <span>Şifre</span>
+                    <input
+                      type="password"
+                      [ngClass]="{ 'is-invalid': submitted && f.sifre.errors }"
+                      name="sifre"
+                      formControlName="sifre"
+                      class="form-control"
+                    />
+                    <div *ngIf="submitted && f.sifre.errors" class="invalid-feedback">
+                      <div *ngIf="f.sifre.errors.required">Şifre boş geçilemez.</div>
+                      <div *ngIf="f.sifre.errors.minlength">
+                        Şifre min 5 karakter olmalı
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-6">
+              <br>
+                <button  class="btn btn-outline-secondary col-md-12 " type="submit">
+                    Kaydet
+                  </button>
+            </div>
+          </div>
+
+        
+
+        
+
+         
+
+     
+
+        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

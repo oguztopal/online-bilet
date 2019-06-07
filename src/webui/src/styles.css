@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files
+@import "https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900";
+@import "https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/open-iconic-bootstrap.min.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/animate.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/magnific-popup.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/aos.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/ionicons.min.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/flaticon.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/icomoon.css";
+@import "C:/Users/oguz/Desktop/Test/bilet-app/src/assets/temp/ecoland/css/style.css"; */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

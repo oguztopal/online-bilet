@@ -1,0 +1,36 @@
+<div class="container">
+
+  
+
+  <div class="card" style="margin:20px; border-radius: 20px; box-shadow: 5px 5px 15px;" >
+     
+      <div class="row">
+        <div class="col-md-6 ">
+          <h6 class="text-center m-3"> Yolcu Bilgileri</h6>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><b>Yolcu Ad Soyad</b>: {{biletbilgileri.yolcuAdSoyad}}</li>
+                <li class="list-group-item"><b>Yolcu E-mail</b> : {{biletbilgileri.yolcuEmail}}</li>
+                <li class="list-group-item"><b>Yolcu Telefon</b> : {{biletbilgileri.yolcuTel}}</li>
+                <li class="list-group-item"><b>Yolcu Adres</b> : {{biletbilgileri.yolcuAdres}}</li>
+              </ul>
+        </div>
+        <div class="col-md-6 ">
+            <h6 class="text-center  m-3"> Uçuş Bilgileri</h6>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><b>Kalkis</b> : {{biletbilgileri.ucusseferleri.kalkis}}</li>
+                <li class="list-group-item"><b>Varış</b> : {{biletbilgileri.ucusseferleri.varis}}</li>
+                <li class="list-group-item"><b>Nereden</b> : {{biletbilgileri.ucusseferleri.gidis.havalimaniAdi}}</li>
+                <li class="list-group-item"><b>Nereye</b> : {{biletbilgileri.ucusseferleri.donus.havalimaniAdi}}</li>
+                <li class="list-group-item"><b>Kalkış Tarihi</b> : {{biletbilgileri.ucusseferleri.kalkisTarihi | date: 'dd/MM/yyyy'}}</li>
+                <li class="list-group-item"><b>PNR Kodu</b>: {{biletbilgileri.pnr}}</li>
+                <li class="list-group-item"><b>Şirket Adı</b>: {{biletbilgileri.ucusseferleri.sirketler.sirketAdi}}</li>
+              </ul>
+        </div>
+        
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-outline-secondary float-right mr-3 mb-3" (click)="iptalEt()"> İptal Et</button></div>
+      </div>
+    </div>
+</div>
