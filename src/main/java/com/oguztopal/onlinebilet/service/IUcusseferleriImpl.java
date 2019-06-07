@@ -20,4 +20,6 @@ public interface IUcusseferleriImpl {
     Kupon kuponsorgula(String kupon);
 
     Boolean durumGuncelle(Ucusdurumlari ucusdurumlari, Ucusseferleri ucusseferleri);
+
+    List<Ucusseferleri> butunUcusSeferleri();
 }

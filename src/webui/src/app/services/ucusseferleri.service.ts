@@ -35,12 +35,37 @@ export class UcusseferleriService {
       .put(environment.API_BASE_PATH+"ucusseferleri/kuponsorgula/" + kupon,this.httpOptions)
       .catch(this.errorHandler);
   }
-  // getAll(): Observable<Havalimanlari[]> {
-  //   let headers = new HttpHeaders();
-  //   headers = headers.append("Content-Type", "application/json");
-  //   return this.httpClient
-  //     .get<Havalimanlari[]>(this.path + "/all");
-  // }
+
+
+  getAll(): Observable<any[]> {
+    return this.httpClient
+      .get<any[]>(environment.API_BASE_PATH+"ucusseferleri/hepsinigetir")
+      .catch(this.errorHandler);
+  }
+
+  delete(seferId: number) {
+    return this.httpClient
+      .delete(environment.API_BASE_PATH+"ucusseferleri/delete/" + seferId)
+      .catch(this.errorHandler);
+  }
+
+  add(ucakseferi) {
+    return this.httpClient
+      .post(environment.API_BASE_PATH+"ucusseferleri/olustur", ucakseferi)
+      .catch(this.errorHandler);
+  }
+
+  edit(ucakseferi) {
+    return this.httpClient
+      .put(environment.API_BASE_PATH+"ucusseferleri/duzenle", ucakseferi)
+      .catch(this.errorHandler);
+  }
+
+  find(seferId): Observable<any> {
+    return this.httpClient
+      .get<any>(environment.API_BASE_PATH+"ucusseferleri/bul/" + seferId)
+      .catch(this.errorHandler);
+  }
   private formatError(error: any) {
     return Observable.bind(error.error);
   }

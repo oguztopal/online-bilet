@@ -48,6 +48,11 @@ public class UcusseferleriController {
         return ResponseEntity.ok(ucusseferleris);
     }
 
+    @GetMapping("/hepsinigetir")
+    public ResponseEntity<List<Ucusseferleri>> butunSeferler(){
+        return ResponseEntity.ok(ucusseferleriService.butunUcusSeferleri());
+    }
+
     @GetMapping("/ucuslar1")
     public void ucusBilgileriGetir(HttpServletRequest request, HttpServletResponse response) throws IOException , ParseException {
         Long gidis = VTUtil.reqGetLong(request.getParameter("gidis"),null);

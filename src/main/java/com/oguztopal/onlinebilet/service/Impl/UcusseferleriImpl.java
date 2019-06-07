@@ -44,7 +44,7 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
         }
         return ucusseferleri;
     }
-
+    @Override
     public List<Ucusseferleri> butunUcusSeferleri(){
         return ucusseferleriRepository.getAllBySeferIdIsNotNull();
     }
@@ -80,6 +80,7 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
         }
         return kontrol;
     }
+
 
     @Override
     public Kupon kuponsorgula(String kupon) {

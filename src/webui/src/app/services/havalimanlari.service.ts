@@ -4,6 +4,7 @@ import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http
 import { Observable } from 'rxjs';
 import { AlertifyService } from './alertify.service';
 import { getAllDebugNodes } from '@angular/core/src/debug/debug_node';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,6 @@ export class HavalimanlariService {
     let headers = new HttpHeaders();
     headers = headers.append("Content-Type", "application/json");
     return this.httpClient
-      .get<Havalimanlari[]>(this.path + "/all");
+      .get<Havalimanlari[]>(environment.API_BASE_PATH + "havalimanlari/all");
   }
 }

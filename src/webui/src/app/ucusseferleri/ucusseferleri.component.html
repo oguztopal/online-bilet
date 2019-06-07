@@ -1,155 +1,201 @@
-<div class=" container">
-    <div class="col-md-8 offset-md-2">
-      <div class="card  border-secondary mt-5">
-        <div class="card-header" style="background-color: #5e5858;">
-          <h5 class="card-title text-center text-white">Kullanıcı Ekleme Sayfası</h5>
-        </div>
-        <div class="card-body">
-          <form
-            [formGroup]="registerForm"
-            (ngSubmit)="register()"
-            class="form-register"
-          >
-          <div class="row">
-            <div class="col-md 6">
-                <div class="form-group">
-                    <label>Adı Soyadı</label>
-                    <input
-                      type="text"
-                      [ngClass]="{ 'is-invalid': submitted && f.adSoyad.errors }"
-                      name="adSoyad"
-                      formControlName="adSoyad"
-                      class="form-control"
-                      autofocus
-                    />
-                    <div
-                      *ngIf="submitted && f.adSoyad.errors"
-                      class="invalid-feedback"
-                    >
-                      <div *ngIf="f.adSoyad.errors.required">
-                        Ad soyad boş geçilemez
-                      </div>
-                    </div>
-                  </div>
-            </div>
-            <div class="col-md 6">
-                <div class="form-group">
-                    <span>Kullanıcı Adı</span>
-                    <input
-                      type="text"
-                      [ngClass]="{ 'is-invalid': submitted && f.kullaniciAdi.errors }"
-                      name="kullaniciAdi"
-                      formControlName="kullaniciAdi"
-                      class="form-control"
-                      autofocus
-                    />
-                    <div *ngIf="submitted && f.kullaniciAdi.errors" class="invalid-feedback">
-                      <div *ngIf="f.kullaniciAdi.errors.required">
-                        Kullanıcı adı boş geçilemez
-                      </div>
-                    </div>
-                  </div>
-             </div>
-          </div>
-       
-          <div class="row">
-              <div class="col-md 6">
-                  <div class="form-group">
-                      <span>Email</span>
-                      <input
-                        type="text"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                        name="email"
-                        formControlName="email"
-                        class="form-control"
-                        autofocus
-                      />
-                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email boş geçilemez.</div>
-                        <div *ngIf="f.email.errors.email">
-                          Email formatını doğru giriniz.
-                        </div>
-                      </div>
-                    </div>
-              </div>
-              <div class="col-md 6">
-                  <div class="form-group">
-                      <span> Adres</span>
-                      <input
-                        type="text"
-                        [ngClass]="{ 'is-invalid': submitted && f.adres.errors }"
-                        name="adres"
-                        formControlName="adres"
-                        class="form-control"
-                        autofocus
-                      />
-                      <div *ngIf="submitted && f.adres.errors" class="invalid-feedback">
-                        <div *ngIf="f.adres.errors.required">Adres boş geçilemez.</div>
-                      </div>
-                    </div>
-               </div>
-          </div>
-          <div class="row">
-              <div class="col-md 6">
-                  <div class="form-group">
-                      <span>Telefon</span>
-                      <input
-                        type="text"
-                        [ngClass]="{ 'is-invalid': submitted && f.telefon.errors }"
-                        name="telefon"
-                        formControlName="telefon"
-                        class="form-control"
-                        autofocus
-                      />
-                      <div *ngIf="submitted && f.telefon.errors" class="invalid-feedback">
-                        <div *ngIf="f.telefon.errors.required">
-                          Telefon boş geçilemez.
-                        </div>
-                      </div>
-                    </div>
-              </div>
-          </div>
-  
-            <div class="row">
-              <div class="col-md-6">
-      
-                  <div class="form-group">
-                      <span>Şifre</span>
-                      <input
-                        type="password"
-                        [ngClass]="{ 'is-invalid': submitted && f.sifre.errors }"
-                        name="sifre"
-                        formControlName="sifre"
-                        class="form-control"
-                      />
-                      <div *ngIf="submitted && f.sifre.errors" class="invalid-feedback">
-                        <div *ngIf="f.sifre.errors.required">Şifre boş geçilemez.</div>
-                        <div *ngIf="f.sifre.errors.minlength">
-                          Şifre min 5 karakter olmalı
-                        </div>
-                      </div>
-                    </div>
-              </div>
-              <div class="col-md-6">
-                <br>
-                  <button  class="btn btn-outline-secondary col-md-12 " type="submit">
-                      Kaydet
-                    </button>
-              </div>
-            </div>
-  
-          
-  
-          
-  
-           
-  
-       
-  
-          
-          </form>
-        </div>
-      </div>
-    </div>
+<dx-data-grid
+  (onRowInserting)="onRowInserting($event)"
+  (onRowUpdating)="onRowUpdating($event)"
+  (onRowRemoving)="onRowRemoving($event)"
+  (onInitialized)="onInitialized($event)"
+  id="gridContainer"
+  #targetDataGrid
+  [allowColumnReordering]="true"
+  [rowAlternationEnabled]="true"
+  [dataSource]="dataSource"
+  [columnHidingEnabled]="true"
+  [remoteOperations]="true"
+
+  showBorders="true"
+  [masterDetail]="{ enabled: false, template: 'detail' }"
+  keyExpr="seferId"
+  allowColumnResizing="true"
+  showRowLines="true"
+  hoverStateEnabled="true"
+  columnAutoWidth="true"
+  noDataText="Veri Yok."
+>
+  <dxo-column-chooser
+    [enabled]="true"
+    mode="dragAndDrop"
+    title="Kolon Gizleme "
+    allowSearch="true"
+    emptyPanelText="Gizli kolon yok."
+  >
+  </dxo-column-chooser>
+  <dxo-paging [enabled]="true" [pageSize]="15"></dxo-paging>
+  <dxo-pager
+    infoText= "Sayfa {0} / {1} (  Toplam Veri Sayısı {2} )"
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[15, 30, 50, 100]"
+    [showInfo]="true"
+  ></dxo-pager>
+  <dxo-search-panel
+    [visible]="true"
+    [width]="300"
+    [highlightCaseSensitive]="false"
+    placeholder="Ara..."
+  ></dxo-search-panel>
+  <dxo-selection mode="multiple"></dxo-selection>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-export
+    [enabled]="true"
+    fileName="SeferListesi"
+    [allowExportSelectedData]="true"
+  ></dxo-export>
+  <dxo-group-panel [visible]="true" emptyPanelText="Sefer Listesi">
+  </dxo-group-panel>
+  <dxo-grouping
+    [contextMenuEnabled]="true"
+    expandMode="rowClick"
+  ></dxo-grouping>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+  <dxo-editing
+
+    [allowAdding]="true"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    mode="popup"
+    useIcons="true"
+  >
+    <dxo-form labelLocation="top">
+      <dxi-item dataField="seferId" [visible]="false"></dxi-item>
+      <dxi-item
+        dataField="gidis.havalimaniAdi"
+        caption="Neredenee"
+        editorType="dxTextBox"
+      ></dxi-item>
+      <dxi-item
+        dataField="donus.havalimaniAdi"
+        caption="Nereye"
+        editorType="dxTextBox"
+      ></dxi-item>
+      <dxi-item dataField="kalkisTarihi" caption="Kalkış Tarihi"></dxi-item>
+      <dxi-item dataField="sirketler.sirketAdi" caption="Şirket Adi"></dxi-item>
+      <dxi-item dataField="biletFiyati" editorType="dxTextBox"></dxi-item>
+      <dxi-item dataField="tahminiSure" editorType="dxTextBox"></dxi-item>
+      <dxi-item dataField="kalkis" editorType="dxTextBox"></dxi-item>
+      <dxi-item dataField="varis" editorType="dxTextBox"></dxi-item>
+      <dxi-item dataField="iptaldurumu" editorType="dxTextBox" ></dxi-item>
+    </dxo-form>
+    <dxo-popup
+      [showTitle]="true"
+      title="Sefer Ekleme/Düzenle"
+      [width]="600"
+      [height]="300"
+    >></dxo-popup
+    >
+    <dxo-texts
+      [confirmDeleteMessage]="'Silmek istediginize emin misiniz?'"
+      [editRow]="'Düzenle'"
+      [deleteRow]="'Sil'"
+      [addRow]="'Ekle'"
+      [saveRowChanges]="'Kaydet'"
+      [cancelRowChanges]="'Vazgeç'"
+    ></dxo-texts>
+    >
+  </dxo-editing>
+  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+
+  <dxi-column dataField="seferId" [allowEditing]="false" [visible]="false">
+    <dxi-validation-rule
+      type="number"
+      valueExpr="seferId"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+
+  <dxi-column
+    caption="Uçuş Durumu"
+    dataField="donus.havalimaniAdi"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Durum Bilgisi Gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    caption="Uçuş Durumu"
+    dataField="gidis.havalimaniAdi"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Durum Bilgisi Gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    caption="Uçak kalkış Tarihi"
+    dataField="kalkisTarihi"
+    dataType="date"
+    format="dd/MM/yyyy"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Kalkış tarihi gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    caption="Uçak kalkış Saati"
+    dataField="kalkis"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Uçak kalkış Saati gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    caption="Uçak kalkış Bitiş"
+    dataField="varis"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Uçak varış Saati gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    caption="Uçuş Durumu"
+    dataField="durum"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="Durum Bilgisi Gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column  dataField="biletFiyati">
+    <dxi-validation-rule
+      type="required"
+      max="15"
+      message="Fiyat gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column  dataField="iptaldurumu">
+    <dxi-validation-rule
+      type="required"
+      max="15"
+      message="gerekli"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <div *dxTemplate="let asama of 'detail'">
+    <h6 class="pl-5">&nbsp;&nbsp;DETAY</h6>
+    <br>
+    <p class="pl-4">Aşama Adı : {{ asama.data.asamaAdi }}</p>
+
+
   </div>
-  
+
+</dx-data-grid>
