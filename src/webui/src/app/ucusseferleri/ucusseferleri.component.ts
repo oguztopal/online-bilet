@@ -16,24 +16,27 @@ export class UcusseferleriComponent implements OnInit {
   constructor(private ucusSeferleriService:UcusseferleriService,private alertifyService:AlertifyService,private havalimanlariService:HavalimanlariService) { }
   @ViewChild("targetDataGrid") dataGrid: DxDataGridComponent;
 
-  dataSource: [];
+  dataSource: any;
+  seferDurumlari:any;
+  sirketler: any;
 
-  seferler: Havalimanlari[];
+  havalimanlari: Havalimanlari[];
 
   data: any;
 
   ngOnInit() {
     this.loadData();
     this.FindHavalimani();
+    this.findSirketler();
+    this.seferDurumGetir();
   }
   FindHavalimani() {
     this.havalimanlariService.getAll().subscribe(
       data => {
         debugger;
-        this.seferler = [];
-        for (let i = 0; i < data.length; i++) {
-          this.seferler.push(data[i]);
-        }
+
+        this.havalimanlari=data;
+        console.log(this.havalimanlari)
       },
       error => {
         this.alertifyService.error(error);
@@ -88,14 +91,29 @@ export class UcusseferleriComponent implements OnInit {
   loadData() {
     this.ucusSeferleriService.getAll().subscribe(
       data => {
-        this.dataSource = [];
+       /* this.dataSource = [];
         for (let i = 0; i < data.length; i++) {
-          this.dataSource.push(data[i]);
-        }
+        //  this.dataSource.push(data[i]);
+        }*/
+       this.dataSource=data;
       },
       error => {
         this.alertifyService.error(error);
       }
     );
+  }
+  findSirketler(){
+    debugger;
+    this.ucusSeferleriService.getsirketler().subscribe(
+      data => {
+        this.sirketler=data;
+      },
+      error => {
+        this.alertifyService.error(error);
+      }
+    );
+  }
+  seferDurumGetir(){
+    this.seferDurumlari=this.ucusSeferleriService.getEnumSeferDurumlari();
   }
 }

@@ -10,7 +10,7 @@ import { AlertifyService } from './services/alertify.service';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DevExtremeModule, DxSelectBoxModule, DxBoxModule, DxFormModule, DxDataGridModule, DxButtonModule, DxPopupComponent, DxPopupModule } from 'devextreme-angular';
+import { DevExtremeModule, DxSelectBoxModule, DxLookupModule, DxBoxModule, DxTreeListModule, DxFormModule, DxDataGridModule, DxButtonModule, DxPopupComponent, DxPopupModule } from 'devextreme-angular';
 import {
   MatButtonModule,
   MatToolbarModule,
@@ -95,7 +95,8 @@ import { UcusseferleriComponent } from './ucusseferleri/ucusseferleri.component'
     MatSnackBarModule,
     DevExtremeModule,
     DxSelectBoxModule,
-    DxBoxModule,DxFormModule,DxDataGridModule,DxButtonModule,DxPopupModule
+    DxLookupModule,
+    DxBoxModule,DxFormModule,DxDataGridModule,DxButtonModule,DxPopupModule,DxTreeListModule
   ],
   providers: [KullaniciService,AlertifyService,HavalimanlariService,UcusseferleriService,BiletService,AuthGuard,AuthenticationService,
     {provide: HTTP_INTERCEPTORS,useClass: JwtInterceptor,multi:true},

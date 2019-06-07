@@ -12,4 +12,5 @@ public interface ISirketlerImpl {
     Boolean sirketSil(Long id);
 
     List<Sirketler> getButunSirketler();
+
 }

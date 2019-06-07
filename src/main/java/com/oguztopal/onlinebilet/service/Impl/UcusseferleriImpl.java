@@ -1,10 +1,10 @@
 package com.oguztopal.onlinebilet.service.Impl;
 
 import com.oguztopal.onlinebilet.dto.UcusseferleriDto;
-import com.oguztopal.onlinebilet.entity.Kupon;
-import com.oguztopal.onlinebilet.entity.Ucusdurumlari;
-import com.oguztopal.onlinebilet.entity.Ucusseferleri;
+import com.oguztopal.onlinebilet.entity.*;
+import com.oguztopal.onlinebilet.repository.HavalimanlariRepository;
 import com.oguztopal.onlinebilet.repository.KuponRepository;
+import com.oguztopal.onlinebilet.repository.SirketlerRepository;
 import com.oguztopal.onlinebilet.repository.UcusseferleriRepository;
 import com.oguztopal.onlinebilet.service.IUcusseferleriImpl;
 import org.modelmapper.ModelMapper;
@@ -25,11 +25,17 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
 
     private final KuponRepository kuponRepository;
 
+    private final SirketlerRepository sirketlerRepository;
+
+    private final HavalimanlariRepository havalimanlariRepository;
+
     private final ModelMapper modelMapper;
 
-    public UcusseferleriImpl(UcusseferleriRepository ucusseferleriRepository, KuponRepository kuponRepository, ModelMapper modelMapper) {
+    public UcusseferleriImpl(UcusseferleriRepository ucusseferleriRepository, KuponRepository kuponRepository, SirketlerRepository sirketlerRepository, HavalimanlariRepository havalimanlariRepository, ModelMapper modelMapper) {
         this.ucusseferleriRepository = ucusseferleriRepository;
         this.kuponRepository = kuponRepository;
+        this.sirketlerRepository = sirketlerRepository;
+        this.havalimanlariRepository = havalimanlariRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -44,7 +50,7 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
         }
         return ucusseferleri;
     }
-
+    @Override
     public List<Ucusseferleri> butunUcusSeferleri(){
         return ucusseferleriRepository.getAllBySeferIdIsNotNull();
     }
@@ -79,6 +85,44 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
             e.getMessage();
         }
         return kontrol;
+    }
+    @Override
+    public Ucusseferleri ucusseferleriguncelle(Ucusseferleri ucusseferleri){
+        if (ucusseferleri==null){
+            throw new IllegalArgumentException("Ucus Seferleri Boş");
+        }
+        if (ucusseferleri.getDonus().getHavalimaniId()==ucusseferleri.getGidis().getHavalimaniId()){
+            throw new IllegalArgumentException("İki Havalimanı Aynı seçilemez.");
+        }
+        Ucusseferleri yeni = ucusseferleriRepository.getBySeferId(ucusseferleri.getSeferId());
+        if (yeni!=null){
+            try {
+                yeni.setAktif(ucusseferleri.getAktif());
+                yeni.setBiletFiyati(ucusseferleri.getBiletFiyati());
+                Havalimanlari donus = havalimanlariRepository.getByHavalimaniId(ucusseferleri.getDonus().getHavalimaniId());
+                if (donus!=null){
+                    yeni.setDonus(donus);
+                }
+                Havalimanlari gidis = havalimanlariRepository.getByHavalimaniId(ucusseferleri.getGidis().getHavalimaniId());
+                if (gidis!=null){
+                    yeni.setGidis(gidis);
+                }
+                yeni.setDurum(Ucusdurumlari.UCAK_KALKMADI);
+                yeni.setKalkis(ucusseferleri.getKalkis());
+                yeni.setVaris(ucusseferleri.getVaris());
+                Sirketler sirketler = sirketlerRepository.getBySirketId(ucusseferleri.getSirketler().getSirketId());
+                yeni.setSirketler(sirketler);
+                yeni.setIptaldurumu(ucusseferleri.getIptaldurumu());
+                ucusseferleriRepository.save(yeni);
+                return  yeni;
+            }catch (Exception ex){
+                ex.getMessage();
+            }
+
+        }
+
+
+        return null;
     }
 
     @Override
