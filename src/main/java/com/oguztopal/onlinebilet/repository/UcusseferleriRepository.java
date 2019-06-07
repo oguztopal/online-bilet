@@ -38,4 +38,5 @@ public interface UcusseferleriRepository extends JpaRepository<Ucusseferleri,Lon
     void ucusDurumuGuncelle(@Param("durumu") String ucusdurumlari,
                                @Param("seferId") Long seferId);
 
+
 }

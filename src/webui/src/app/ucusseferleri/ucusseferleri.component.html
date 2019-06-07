@@ -1,275 +1,229 @@
-<dx-data-grid
-  (onRowInserting)="onRowInserting($event)"
-  (onRowUpdating)="onRowUpdating($event)"
-  (onRowRemoving)="onRowRemoving($event)"
-  (onInitialized)="onInitialized($event)"
-  #targetDataGrid
-  [allowColumnReordering]="true"
-  [rowAlternationEnabled]="true"
-  [dataSource]="dataSource"
-  [columnHidingEnabled]="true"
-  [remoteOperations]="true"
-  id="gridContainer"
-  showBorders="true"
-  [masterDetail]="{ enabled: false, template: 'detail' }"
-  keyExpr="seferId"
-  allowColumnResizing="true"
-  showRowLines="true"
-  hoverStateEnabled="true"
-  columnAutoWidth="true"
-  noDataText="Veri Yok."
->
-  <dxo-column-chooser
-    [enabled]="true"
-    mode="dragAndDrop"
-    title="Kolon Gizleme "
-    allowSearch="true"
-    emptyPanelText="Gizli kolon yok."
-  >
-  </dxo-column-chooser>
-  <dxo-paging [enabled]="true" [pageSize]="15"></dxo-paging>
-  <dxo-pager
-    infoText= "Sayfa {0} / {1} (  Toplam Veri Sayısı {2} )"
-    [showPageSizeSelector]="true"
-    [allowedPageSizes]="[15, 30, 50, 100]"
-    [showInfo]="true"
-  ></dxo-pager>
-  <dxo-search-panel
-    [visible]="true"
-    [width]="300"
-    [highlightCaseSensitive]="false"
-    placeholder="Ara..."
-  ></dxo-search-panel>
-  <dxo-selection mode="multiple"></dxo-selection>
-  <dxo-sorting mode="multiple"></dxo-sorting>
-  <dxo-export
-    [enabled]="true"
-    fileName="SeferListesi"
-    [allowExportSelectedData]="true"
-  ></dxo-export>
-  <dxo-group-panel [visible]="true" emptyPanelText="Sefer Listesi">
-  </dxo-group-panel>
-  <dxo-grouping
-    [contextMenuEnabled]="true"
-    expandMode="rowClick"
-  ></dxo-grouping>
-  <dxo-filter-row [visible]="true"></dxo-filter-row>
-  <dxo-header-filter [visible]="true"></dxo-header-filter>
+<div class="container-fluid mt-2 ">
+  <div class="row ml-3 mr-3">
 
-  <dxo-editing
-    [allowAdding]="true"
-    [allowUpdating]="true"
-    [allowDeleting]="true"
-    mode="popup"
-    useIcons="true"
-  >
-    <dxo-form labelLocation="top">
-      <dxi-item dataField="seferId" [visible]="false"></dxi-item>
-      <dxi-item
-        dataField="gidis.havalimaniAdi"
-        caption="Firma Adı"
-        editorType="dxTextBox"
-      ></dxi-item>
-      <dxi-item
-        dataField="donus.havalimaniAdi"
-        caption="Sözleşme Adı"
-        editorType="dxTextBox"
-      ></dxi-item>
-      <dxi-item dataField="kalkisTarihi" caption="Başlangıç Tarihi"></dxi-item>
-      <dxi-item dataField="kalkis" caption="Bitiş Tarihi"></dxi-item>
-      <dxi-item dataField="varis" editorType="dxTextBox"></dxi-item>
-      <dxi-item dataField="durum" editorType="dxTextBox"></dxi-item>
-      <dxi-item dataField="biletFiyati" editorType="dxTextBox"></dxi-item>
-      <dxi-item dataField="iptaldurumu" editorType="dxTextBox"></dxi-item>
-      <dxi-item dataField="sirketler.sirketAdi" editorType="dxTextBox" ></dxi-item>
+        <dx-data-grid
+          (onRowInserting)="onRowInserting($event)"
+          (onRowUpdating)="onRowUpdating($event)"
+          (onRowRemoving)="onRowRemoving($event)"
+          (onInitialized)="onInitialized($event)"
+          #targetDataGrid
+          [allowColumnReordering]="true"
+          [rowAlternationEnabled]="true"
+          [dataSource]="dataSource"
+          [columnHidingEnabled]="true"
+          [remoteOperations]="true"
+          id="gridContainer"
+          showBorders="true"
+          [masterDetail]="{ enabled: false, template: 'detail' }"
+          keyExpr="seferId"
+          allowColumnResizing="true"
+          showRowLines="true"
+          hoverStateEnabled="true"
+          columnAutoWidth="true"
+          noDataText="Veri Yok."
+        >
+          <dxo-column-chooser
+            [enabled]="true"
+            mode="dragAndDrop"
+            title="Kolon Gizleme "
+            allowSearch="true"
+            emptyPanelText="Gizli kolon yok."
+          >
+          </dxo-column-chooser>
+          <dxo-paging [enabled]="true" [pageSize]="15"></dxo-paging>
+          <dxo-pager
+            infoText= "Sayfa {0} / {1} (  Toplam Veri Sayısı {2} )"
+            [showPageSizeSelector]="true"
+            [allowedPageSizes]="[15, 30, 50, 100]"
+            [showInfo]="true"
+          ></dxo-pager>
+          <dxo-search-panel
+            [visible]="true"
+            [width]="300"
+            [highlightCaseSensitive]="false"
+            placeholder="Ara..."
+          ></dxo-search-panel>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-sorting mode="multiple"></dxo-sorting>
+          <dxo-export
+            [enabled]="true"
+            fileName="SeferListesi"
+            [allowExportSelectedData]="true"
+          ></dxo-export>
+          <dxo-group-panel [visible]="true" emptyPanelText="Sefer Listesi">
+          </dxo-group-panel>
+          <dxo-grouping
+            [contextMenuEnabled]="true"
+            expandMode="rowClick"
+          ></dxo-grouping>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
 
+          <dxo-editing
+            [allowAdding]="true"
+            [allowUpdating]="true"
+            [allowDeleting]="true"
+            mode="popup"
+            useIcons="true"
+          >
+            <dxo-form labelLocation="top">
+              <dxi-item dataField="seferId" [visible]="false"></dxi-item>
+              <dxi-item
+                dataField="gidis.havalimaniId"
+                caption="Firma Adı"
+                editorType="dxSelectBox"
+              ></dxi-item>
+              <dxi-item
+                dataField="donus.havalimaniId"
+                caption="Sözleşme Adı"
+                editorType="dxSelectBox"
+              ></dxi-item>
+              <dxi-item dataField="kalkisTarihi" caption="Başlangıç Tarihi"></dxi-item>
+              <dxi-item dataField="kalkis" caption="Bitiş Tarihi"></dxi-item>
+              <dxi-item dataField="varis" editorType="dxTextBox"></dxi-item>
+              <dxi-item dataField="durum" editorType="dxSelectBox"></dxi-item>
+              <dxi-item dataField="biletFiyati" editorType="dxTextBox"></dxi-item>
+              <dxi-item dataField="iptaldurumu" editorType="dxTextBox"></dxi-item>
+              <dxi-item dataField="sirketler.sirketId" editorType="dxSelectBox" ></dxi-item>
+            </dxo-form>
+            <dxo-popup
+              [showTitle]="true"
+              title="Sözleşme Ekleme/Düzenle"
+              [width]="800"
+              [height]="600"
+            >></dxo-popup
+            >
+            <dxo-texts
+              [confirmDeleteMessage]="'Silmek istediginize emin misiniz?'"
+              [editRow]="'Düzenle'"
+              [deleteRow]="'Sil'"
+              [addRow]="'Ekle'"
+              [saveRowChanges]="'Kaydet'"
+              [cancelRowChanges]="'Vazgeç'"
+            ></dxo-texts>
+            >
+          </dxo-editing>
+          <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
 
-    </dxo-form>
-    <dxo-popup
-      [showTitle]="true"
-      title="Sözleşme Ekleme/Düzenle"
-      [width]="800"
-      [height]="600"
-    >></dxo-popup
-    >
-    <dxo-texts
-      [confirmDeleteMessage]="'Silmek istediginize emin misiniz?'"
-      [editRow]="'Düzenle'"
-      [deleteRow]="'Sil'"
-      [addRow]="'Ekle'"
-      [saveRowChanges]="'Kaydet'"
-      [cancelRowChanges]="'Vazgeç'"
-    ></dxo-texts>
-    >
-  </dxo-editing>
-  <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+          <dxi-column dataField="seferId" [allowEditing]="false" [visible]="false">
+            <dxi-validation-rule
+              type="number"
+              valueExpr="seferId"
+            ></dxi-validation-rule>
+          </dxi-column>
 
-  <dxi-column dataField="seferId" [allowEditing]="false" [visible]="false">
-    <dxi-validation-rule
-      type="number"
-      valueExpr="seferId"
-    ></dxi-validation-rule>
-  </dxi-column>
+          <dxi-column  dataField="gidis.havalimaniId" caption="Nereden ">
+            <dxi-validation-rule
+              type="required"
+              max="15"
+              message="Havalimanı seçiniz."
+            ></dxi-validation-rule>
+            <dxo-lookup
+              [dataSource]="havalimanlari"
+              valueExpr="havalimaniId"
+              displayExpr="havalimaniAdi"
+            ></dxo-lookup>
+          </dxi-column>
 
-
-  <dxi-column  dataField="gidis.havalimaniAdi" caption="Nereden">
-    <dxi-validation-rule
-      type="required"
-      max="25"
-      message="Havalimani Adi Gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column  dataField="donus.havalimaniAdi" caption="Nereye">
-    <dxi-validation-rule
-      type="required"
-      max="25"
-      message="Havalimani Adi Gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-  <dxi-column
-    caption="Başlangıç Tarihi"
-    dataField="kalkisTarihi"
-    dataType="date"
-    format="dd/MM/yyyy"
-  >
-    <dxi-validation-rule
-      type="required"
-      message="Başlangıç tarihi gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-
-  <dxi-column  dataField="durumu">
-    <dxi-validation-rule
-      type="required"
-      max="15"
-      message="Belge numarası gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-  <dxi-column
-    dataField="Aşamalar"
-
-    [allowFiltering]="false"
-    [allowSorting]="false"
-    cellTemplate="cellTemplate"
-  ></dxi-column>
-  <dxi-column
-    dataField="Dosyalar"
-
-    [allowFiltering]="false"
-    [allowSorting]="false"
-    cellTemplate="cellTemplate2"
-  ></dxi-column>
-  <dxi-column
-    dataField="Projeler"
-
-    [allowFiltering]="false"
-    [allowSorting]="false"
-    cellTemplate="cellTemplate3"
-  ></dxi-column>
-
-  <dxi-column  dataField="anlasmaKapsami" caption="Anlaşma Kapsamı Notu">
-    <dxi-validation-rule
-      type="required"
-      max="150"
-      message="Anlaşma kapsamı gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-  <dxi-column dataField="odemeSekli" caption="Ödeme Şekli">
-    <dxi-validation-rule
-      type="required"
-      max="45"
-      message="Ödeme şekli gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-  <dxi-column dataField="notu">
-    <dxi-validation-rule
-      type="required"
-      max="300"
-      message="Not gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-  <dxi-column  dataField="meblag" dataType="number"  format=" #,##0.## TL" caption="Meblağ" >
-    <dxi-validation-rule
-
-      type="required"
-      max="15"
-      message="Meblağ gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-  <dxi-column  dataField="yenileme">
-    <dxi-validation-rule
-      type="required"
-      max="300"
-      message="Yenileme notu gerekli"
-    ></dxi-validation-rule>
-  </dxi-column>
-
-  <dxi-column
-    [allowEditing]="false"
-    [visible]="false"
-    dataField="evrakKayitTarihi"
-    dataType="date"
-  >
-  </dxi-column>
-
-  <dxi-column
-    [allowEditing]="false"
-    [visible]="false"
-    dataField="evrakGuncellemeTarihi"
-    dataType="date"
-  >
-  </dxi-column>
-
-  <dxi-column
-    [allowEditing]="false"
-    [visible]="false"
-    dataField="evrakKayitKullaniciId"
-  >
-  </dxi-column>
-
-  <dxi-column
-    [allowEditing]="false"
-    [visible]="false"
-    dataField="evrakGuncellemeKullaniciId"
-  >
-  </dxi-column>
-
-  <div *dxTemplate="let data of 'cellTemplate'">
-    <dx-button
-      matTooltip="Aşamalara git."
-      id="asama"
-      text="Aşamalar"
-      (click)="evrakAsamayaGit(data.data.evrakId)"
-    >
-      <i class="fa fa-list-ul" aria-hidden="true"></i
-      ></dx-button>
-  </div>
-  <div *dxTemplate="let data of 'cellTemplate2'">
-    <dx-button
-      matTooltip="Dosyalara git."
-      id="dosya"
-      text="Dosyalar"
-      (click)="evrakDosyayaGit(data.data.evrakId)"
-    >
-      <i class="fa fa-folder-o" aria-hidden="true"></i
-      ></dx-button>
-  </div>
-  <div *dxTemplate="let data of 'cellTemplate3'">
-    <dx-button
-      matTooltip="Projelere git."
-      id="proje"
-      text="Projeler"
-      (click)="projeyeGit(data.data.evrakId)"
-    >
-      &nbsp;<i class="fa fa-inbox" aria-hidden="true"></i
-    ></dx-button>
-  </div>
+          <dxi-column  dataField="donus.havalimaniId" caption="Nereye">
+            <dxi-validation-rule
+              type="required"
+              max="15"
+              message="Havalimanı seçiniz."
+            ></dxi-validation-rule>
+            <dxo-lookup
+              [dataSource]="havalimanlari"
+              valueExpr="havalimaniId"
+              displayExpr="havalimaniAdi"
+            ></dxo-lookup>
+          </dxi-column>
 
 
-</dx-data-grid>
+          <dxi-column
+            caption="Kalkış Tarihi"
+            dataField="kalkisTarihi"
+            dataType="datetime"
+            format="dd/MM/yyyy HH:mm"
+          >
+            <dxi-validation-rule
+              type="required"
+              message="Başlangıç tarihi gerekli"
+            ></dxi-validation-rule>
+          </dxi-column>
+
+
+          <dxi-column  dataField="durum" caption="Durum">
+            <dxi-validation-rule
+              type="required"
+              max="15"
+              message="Durum Seçiniz."
+            ></dxi-validation-rule>
+            <dxo-lookup
+              [dataSource]="seferDurumlari"
+              valueExpr="durum"
+              displayExpr="durum"
+            ></dxo-lookup>
+          </dxi-column>
+
+
+          <dxi-column  dataField="iptaldurumu" caption="İptal Durumu">
+            <dxi-validation-rule
+              type="required"
+              max="150"
+              message="İptal Durumu seçiniz"
+            ></dxi-validation-rule>
+          </dxi-column>
+
+          <dxi-column dataField="kalkis" caption="Kalkış Saati">
+            <dxi-validation-rule
+              type="required"
+              max="45"
+              message="Kalkış Saati seçiniz"
+            ></dxi-validation-rule>
+          </dxi-column>
+
+          <dxi-column dataField="varis">
+            <dxi-validation-rule
+              type="required"
+              max="300"
+              message="Varış Bilgisi seçiniz."
+            ></dxi-validation-rule>
+          </dxi-column>
+
+          <dxi-column  dataField="biletFiyati" dataType="number"  format=" #,##0.## TL" caption="Fiyat" >
+            <dxi-validation-rule
+
+              type="required"
+              max="15"
+              message="Fiyat gerekli"
+            ></dxi-validation-rule>
+          </dxi-column>
+
+          <dxi-column  dataField="sirketler.sirketId" caption="Şirket Adı">
+            <dxi-validation-rule
+              type="required"
+              max="15"
+              message="Şirket Seçiniz."
+            ></dxi-validation-rule>
+            <dxo-lookup
+              [dataSource]="sirketler"
+              valueExpr="sirketId"
+              displayExpr="sirketAdi"
+            ></dxo-lookup>
+          </dxi-column>
+
+
+
+
+
+
+
+
+
+
+        </dx-data-grid>
+
+
+
+</div>
+

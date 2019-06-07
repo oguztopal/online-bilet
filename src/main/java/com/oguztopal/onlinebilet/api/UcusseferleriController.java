@@ -42,6 +42,11 @@ public class UcusseferleriController {
         return ResponseEntity.ok(ucusseferleri);
     }
 
+    @GetMapping("/hepsinigetir")
+    public ResponseEntity<List<Ucusseferleri>> hepsiniGetir() {
+        return ResponseEntity.ok(ucusseferleriService.butunUcusSeferleri());
+    }
+
     @GetMapping("/ucuslar")
     public ResponseEntity<List<UcusseferleriDto>> getUcusSeferleriByGidisDonus(@Valid @RequestBody UcusseferleriDto ucusseferleri) {
         List<UcusseferleriDto>  ucusseferleris = ucusseferleriService.getUcusSeferiByGidisAndDonus(ucusseferleri);
@@ -63,5 +68,10 @@ public class UcusseferleriController {
     @RequestMapping(path = "/kuponsorgula/{kupon}" , method = RequestMethod.PUT)
     public ResponseEntity<Kupon>  kupon (@PathVariable("kupon") String kupon) throws IOException {
         return ResponseEntity.ok(ucusseferleriService.kuponsorgula(kupon));
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<Ucusseferleri>  ucusseferleriguncelle (@Valid @RequestBody Ucusseferleri ucusseferleri) throws IOException {
+        return ResponseEntity.ok(ucusseferleriService.ucusseferleriguncelle(ucusseferleri));
     }
 }

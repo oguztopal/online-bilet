@@ -47,4 +47,68 @@ export class UcusseferleriService {
   errorHandler(error: HttpErrorResponse) {
     return throwError(error)
   }
+
+
+
+
+  getAll(): Observable<any[]> {
+    return this.httpClient
+      .get<any[]>(environment.API_BASE_PATH +"ucusseferleri/hepsinigetir")
+      .catch(this.errorHandler);
+  }
+
+  delete(asamaId: number) {
+    return this.httpClient
+      .delete(environment.API_BASE_PATH +"ucusseferleri/delete/" + asamaId)
+      .catch(this.errorHandler);
+  }
+
+  add(asama) {
+    return this.httpClient
+      .post(environment.API_BASE_PATH +"ucusseferleri/create", asama)
+      .catch(this.errorHandler);
+  }
+
+  edit(asama) {
+    return this.httpClient
+      .put(environment.API_BASE_PATH +"ucusseferleri/edit", asama)
+      .catch(this.errorHandler);
+  }
+
+  find(asamaId): Observable<any> {
+    return this.httpClient
+      .get<any>(environment.API_BASE_PATH +"ucusseferleri/find/" + asamaId)
+      .catch(this.errorHandler);
+  }
+  getsirketler(): Observable<any[]> {
+    return this.httpClient
+      .get<any[]>(environment.API_BASE_PATH +"sirketler/all")
+      .catch(this.errorHandler);
+  }
+  getEnumSeferDurumlari() {
+    let durumlar: any[] = [
+      {
+        durum: "UCAK_KALKMADI"
+      },
+      {
+        durum: "GUVENLIK_KONTROLU"
+      },
+      {
+        durum: "KALKIS_ICIN_HAZIR"
+      },
+      {
+        durum: "ROTAR"
+      },
+      {
+        durum: "UCUS_GERCEKLESIYOR"
+      },
+      {
+        name: "UCUS_GERCEKLESTI"
+      }
+    ];
+    return durumlar;
+  }
 }
+
+
+
