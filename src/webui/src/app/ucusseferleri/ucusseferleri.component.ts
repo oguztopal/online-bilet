@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from "@angular/forms";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import { AlertifyService } from "../services/alertify.service";
+import { DxDataGridComponent } from "devextreme-angular";
+
+import {UcusseferleriService} from "../services/ucusseferleri.service";
+import {HavalimanlariService} from "../services/havalimanlari.service";
+import {Havalimanlari} from "../models/havalimanlari";
 
 @Component({
   selector: 'app-ucusseferleri',
@@ -13,9 +13,89 @@ import {
 })
 export class UcusseferleriComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ucusSeferleriService:UcusseferleriService,private alertifyService:AlertifyService,private havalimanlariService:HavalimanlariService) { }
+  @ViewChild("targetDataGrid") dataGrid: DxDataGridComponent;
+
+  dataSource: [];
+
+  seferler: Havalimanlari[];
+
+  data: any;
 
   ngOnInit() {
+    this.loadData();
+    this.FindHavalimani();
+  }
+  FindHavalimani() {
+    this.havalimanlariService.getAll().subscribe(
+      data => {
+        debugger;
+        this.seferler = [];
+        for (let i = 0; i < data.length; i++) {
+          this.seferler.push(data[i]);
+        }
+      },
+      error => {
+        this.alertifyService.error(error);
+      }
+    );
+  }
+  onInitialized(e) {
+    e.element.style.fontSize = "10px";
+  }
+  onRowInserting(e) {
+    this.ucusSeferleriService.add(e.data).subscribe(
+      data => {
+        this.loadData();
+        this.alertifyService.success(
+          "Sefer ekleme işlemi başarıyla gerçekleşti."
+        );
+      },
+      error => {
+        this.alertifyService.error(error);
+      }
+    );
+  }
+  onRowUpdating(e) {
+    this.data = Object.assign({}, e.oldData, e.newData);
+    this.ucusSeferleriService.edit(this.data).subscribe(
+      data => {
+        this.loadData();
+        this.alertifyService.success(
+          "Sefer güncelleme işlemi başarıyla gerçekleşti."
+        );
+      },
+      error => {
+        this.loadData();
+        this.alertifyService.error(error);
+      }
+    );
   }
 
+  onRowRemoving(e) {
+    this.ucusSeferleriService.delete(e.key).subscribe(
+      data => {
+        this.loadData();
+        this.alertifyService.warning("Silme işlemi başarıyla gerçekleşti.");
+      },
+      error => {
+        this.loadData();
+        this.alertifyService.error(error);
+      }
+    );
+  }
+
+  loadData() {
+    this.ucusSeferleriService.getAll().subscribe(
+      data => {
+        this.dataSource = [];
+        for (let i = 0; i < data.length; i++) {
+          this.dataSource.push(data[i]);
+        }
+      },
+      error => {
+        this.alertifyService.error(error);
+      }
+    );
+  }
 }
