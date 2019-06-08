@@ -71,7 +71,15 @@ public class UcusseferleriController {
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<Ucusseferleri>  ucusseferleriguncelle (@Valid @RequestBody Ucusseferleri ucusseferleri) throws IOException {
+    public ResponseEntity<Ucusseferleri>  ucusseferleriguncelle (@Valid @RequestBody Ucusseferleri ucusseferleri) throws IOException, ParseException {
         return ResponseEntity.ok(ucusseferleriService.ucusseferleriguncelle(ucusseferleri));
+    }
+    @PostMapping("/create")
+    public ResponseEntity<Ucusseferleri>  ucusseferiekle (@Valid @RequestBody Ucusseferleri ucusseferleri) throws IOException, ParseException {
+        return ResponseEntity.ok(ucusseferleriService.ucusseferiekle(ucusseferleri));
+    }
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<Boolean>  ucusSeferiIptal (@PathVariable("id") Long seferId) throws IOException {
+        return ResponseEntity.ok(ucusseferleriService.ucusSeferiPasifYap(seferId));
     }
 }

@@ -29,26 +29,8 @@ export class BiletService {
 
   };
 
-
-  yolla(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    debugger;
-    return this.httpClient.post(environment.API_BASE_PATH+"bilet"+path,{params} ,this.httpOptions).pipe(catchError(this.formatError));
-  }
-
   post(path: string,data ): Observable<any> {
     return this.httpClient.post(environment.API_BASE_PATH +"bilet"+ path,data, this.httpOptions).pipe(catchError(this.formatError));
-  }
-
-  pnrSorgula(path: string,params: HttpParams = new HttpParams()): Observable<any> {
-    debugger;
-    return this.httpClient.get("http://localhost:8088/bilet/pnrsorgula",{params}).pipe(catchError(this.formatError));
-  }
-
-  pnrsorgulamaa(path: string, params): Observable<any> {
-    debugger;
-    return this.httpClient
-      .get("http://localhost:8088/bilet/pnrsorgula" , params)
-      .catch(this.formatError);
   }
 
   onr(firmaId) {

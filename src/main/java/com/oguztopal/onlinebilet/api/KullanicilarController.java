@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/kullanicilar")
+@CrossOrigin(origins = "http://localhost:4200")
 public class KullanicilarController {
 
     private final IKullanicilarImpl kullanicilarService;
@@ -20,6 +21,11 @@ public class KullanicilarController {
     @GetMapping("/{id}")
     public ResponseEntity<Kullanicilar> getKullaniciById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(kullanicilarService.kullaniciGetirById(id));
+    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<Kullanicilar> getKullaniciByUsername(@PathVariable("username") String username) {
+        return ResponseEntity.ok(kullanicilarService.kullaniciGetirByUsername(username));
     }
 
     @PostMapping()

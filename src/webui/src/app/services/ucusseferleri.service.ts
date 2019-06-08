@@ -35,12 +35,7 @@ export class UcusseferleriService {
       .put(environment.API_BASE_PATH+"ucusseferleri/kuponsorgula/" + kupon,this.httpOptions)
       .catch(this.errorHandler);
   }
-  // getAll(): Observable<Havalimanlari[]> {
-  //   let headers = new HttpHeaders();
-  //   headers = headers.append("Content-Type", "application/json");
-  //   return this.httpClient
-  //     .get<Havalimanlari[]>(this.path + "/all");
-  // }
+
   private formatError(error: any) {
     return Observable.bind(error.error);
   }
@@ -50,34 +45,33 @@ export class UcusseferleriService {
 
 
 
-
   getAll(): Observable<any[]> {
     return this.httpClient
       .get<any[]>(environment.API_BASE_PATH +"ucusseferleri/hepsinigetir")
       .catch(this.errorHandler);
   }
 
-  delete(asamaId: number) {
+  delete(seferId: number) {
     return this.httpClient
-      .delete(environment.API_BASE_PATH +"ucusseferleri/delete/" + asamaId)
+      .put(environment.API_BASE_PATH +"ucusseferleri/delete/" + seferId,this.httpOptions)
       .catch(this.errorHandler);
   }
 
-  add(asama) {
+  add(sefer) {
     return this.httpClient
-      .post(environment.API_BASE_PATH +"ucusseferleri/create", asama)
+      .post(environment.API_BASE_PATH +"ucusseferleri/create", sefer)
       .catch(this.errorHandler);
   }
 
-  edit(asama) {
+  edit(sefer) {
     return this.httpClient
-      .put(environment.API_BASE_PATH +"ucusseferleri/edit", asama)
+      .put(environment.API_BASE_PATH +"ucusseferleri/edit", sefer)
       .catch(this.errorHandler);
   }
 
-  find(asamaId): Observable<any> {
+  find(seferId): Observable<any> {
     return this.httpClient
-      .get<any>(environment.API_BASE_PATH +"ucusseferleri/find/" + asamaId)
+      .get<any>(environment.API_BASE_PATH +"ucusseferleri/find/" + seferId)
       .catch(this.errorHandler);
   }
   getsirketler(): Observable<any[]> {

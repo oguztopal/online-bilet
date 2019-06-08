@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class VTUtil {
 
@@ -64,5 +65,14 @@ public class VTUtil {
         calendar.setTime(date);
         calendar.add(Calendar.HOUR_OF_DAY, hours);
         return calendar.getTime();
+    }
+    public static long dakikaFarki(Date eski) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String date1= sdf.format(new Date());
+        String date2= sdf.format(eski);
+        Date d1 = sdf.parse(date1);
+        Date d2 = sdf.parse(date2);
+        long fark = d2.getTime() - d1.getTime();
+        return TimeUnit.MILLISECONDS.toMinutes(fark);
     }
 }

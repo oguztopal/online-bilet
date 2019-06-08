@@ -7,6 +7,8 @@ import com.oguztopal.onlinebilet.repository.KuponRepository;
 import com.oguztopal.onlinebilet.repository.SirketlerRepository;
 import com.oguztopal.onlinebilet.repository.UcusseferleriRepository;
 import com.oguztopal.onlinebilet.service.IUcusseferleriImpl;
+import com.oguztopal.onlinebilet.util.VTUtil;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +54,7 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
     }
     @Override
     public List<Ucusseferleri> butunUcusSeferleri(){
-        return ucusseferleriRepository.getAllBySeferIdIsNotNull();
+        return ucusseferleriRepository.getAllBySeferIdIsNotNullAndAktif(true);
     }
 
     @Override
@@ -87,17 +89,21 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
         return kontrol;
     }
     @Override
-    public Ucusseferleri ucusseferleriguncelle(Ucusseferleri ucusseferleri){
+    public Ucusseferleri ucusseferleriguncelle(Ucusseferleri ucusseferleri) throws ParseException {
         if (ucusseferleri==null){
             throw new IllegalArgumentException("Ucus Seferleri Boş");
         }
         if (ucusseferleri.getDonus().getHavalimaniId()==ucusseferleri.getGidis().getHavalimaniId()){
             throw new IllegalArgumentException("İki Havalimanı Aynı seçilemez.");
         }
-        Ucusseferleri yeni = ucusseferleriRepository.getBySeferId(ucusseferleri.getSeferId());
-        if (yeni!=null){
+        Long dakikaFarki = VTUtil.dakikaFarki(ucusseferleri.getKalkisTarihi());
+        if (dakikaFarki<=60){
+            throw new IllegalArgumentException("Uçuş Eklemek için Şimdiki Zaman ile arasında minumum 3 saat olmalıdır.!!");
+        }
+        Ucusseferleri kontrol = ucusseferleriRepository.getBySeferId(ucusseferleri.getSeferId());
+        if (kontrol==null){
             try {
-                yeni.setAktif(ucusseferleri.getAktif());
+                Ucusseferleri yeni = new Ucusseferleri();
                 yeni.setBiletFiyati(ucusseferleri.getBiletFiyati());
                 Havalimanlari donus = havalimanlariRepository.getByHavalimaniId(ucusseferleri.getDonus().getHavalimaniId());
                 if (donus!=null){
@@ -113,6 +119,7 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
                 Sirketler sirketler = sirketlerRepository.getBySirketId(ucusseferleri.getSirketler().getSirketId());
                 yeni.setSirketler(sirketler);
                 yeni.setIptaldurumu(ucusseferleri.getIptaldurumu());
+                yeni.setKalkisTarihi(ucusseferleri.getKalkisTarihi());
                 ucusseferleriRepository.save(yeni);
                 return  yeni;
             }catch (Exception ex){
@@ -123,6 +130,64 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
 
 
         return null;
+    }
+    @Override
+    public Ucusseferleri ucusseferiekle(Ucusseferleri ucusseferleri) throws ParseException {
+        if (ucusseferleri==null){
+            throw new IllegalArgumentException("Uçuş sefer bilgileri Boş");
+        }
+        if (ucusseferleri.getDonus().getHavalimaniId()==ucusseferleri.getGidis().getHavalimaniId()){
+            throw new IllegalArgumentException("Havalimanları aynı olamaz.");
+        }
+        Long dakikaFarki = VTUtil.dakikaFarki(ucusseferleri.getKalkisTarihi());
+        if (dakikaFarki<=60){
+            throw new IllegalArgumentException("Uçuş Eklemek için Şimdiki Zaman ile arasında minumum 3 saat olmalıdır.!!");
+        }
+        try {
+            Ucusseferleri yeni = new Ucusseferleri();
+            yeni.setIptaldurumu(ucusseferleri.getIptaldurumu());
+            yeni.setAktif(true);
+            yeni.setKalkis(ucusseferleri.getKalkis());
+            yeni.setVaris(ucusseferleri.getVaris());
+            if (ucusseferleri.getDurum()!=Ucusdurumlari.UCAK_KALKMADI){
+                throw new IllegalArgumentException("Yeni Sefer Durum bilgisi UCAK_KALKMADI olmalıdır.");
+            }
+            yeni.setDurum(ucusseferleri.getDurum());
+            yeni.setIptaldurumu(ucusseferleri.getIptaldurumu());
+            Sirketler sirketler = sirketlerRepository.getBySirketId(ucusseferleri.getSirketler().getSirketId());
+            if (sirketler!=null){
+                yeni.setSirketler(sirketler);
+            }
+            Havalimanlari gidis = havalimanlariRepository.getByHavalimaniId(ucusseferleri.getGidis().getHavalimaniId());
+            if (gidis!=null){
+                yeni.setGidis(gidis);
+            }
+            Havalimanlari donus  = havalimanlariRepository.getByHavalimaniId(ucusseferleri.getDonus().getHavalimaniId());
+            if (donus!=null){
+                yeni.setDonus(donus);
+            }
+            yeni.setBiletFiyati(ucusseferleri.getBiletFiyati());
+            ucusseferleriRepository.save(yeni);
+            return yeni;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    @Transactional
+    @Override
+    public Boolean ucusSeferiPasifYap(Long seferId){
+        Boolean kontrol=false;
+        if (seferId==null){
+            throw new IllegalArgumentException("Sefer id boş.!!");
+        }
+        try {
+            ucusseferleriRepository.ucusSeferiIptal(seferId);
+            kontrol = true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return kontrol;
     }
 
     @Override

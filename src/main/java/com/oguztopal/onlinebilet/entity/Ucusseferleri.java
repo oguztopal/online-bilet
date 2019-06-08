@@ -69,7 +69,7 @@ public class Ucusseferleri implements Serializable {
     @Column(name="kalkis")
     private Date kalkis;
 
-    @JsonFormat(pattern="HH:mm:ss")
+    @JsonFormat(pattern="HH:mm")
     @Temporal(TemporalType.TIME)
     @Column(name="varis")
     private Date varis;

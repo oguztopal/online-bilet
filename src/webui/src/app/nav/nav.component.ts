@@ -3,6 +3,7 @@ import { BiletService } from '../services/bilet.service';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../services/alertify.service';
 import { AuthenticationService } from '../security/authentication.service';
+import {KullaniciService} from "../services/kullanici.service";
 declare let alertify: any;
 @Component({
   selector: 'app-nav',
@@ -13,11 +14,13 @@ export class NavComponent implements OnInit {
 
   constructor(private biletService: BiletService,
     private router: Router,
-    private alertifyService: AlertifyService, private authService: AuthenticationService) { }
+    private alertifyService: AlertifyService, private authService: AuthenticationService,private kullaniciService: KullaniciService) { }
   aktifKullanici: any;
+  yetkili: Boolean=false;
   token:any;
   ngOnInit() {
     this.aktifKullanici = JSON.parse(localStorage.getItem('currentUser')).kullaniciAdi;
+    this.findkullanici();
 
   }
   pnrSorgula() {
@@ -44,9 +47,21 @@ export class NavComponent implements OnInit {
   }
 
   cikisYap() {
-    alert("fghjkl")
+    alert("Çıkış Yapılıyor")
     this.token=""
     this.authService.logout();
 
+  }
+  findkullanici() {
+    this.kullaniciService.findKullanicibyUsername(JSON.parse(localStorage.getItem('currentUser')).kullaniciAdi).subscribe(
+      data => {
+        if (data.kullaniciTipi=="3"){
+          this.yetkili = true;
+        }else
+          this.yetkili=false;
+      },
+      error => {
+      }
+    );
   }
 }

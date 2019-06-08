@@ -26,6 +26,11 @@ public class KullanicilarImpl implements IKullanicilarImpl {
     }
 
     @Override
+    public Kullanicilar kullaniciGetirByUsername(String username){
+        return kullanicilarDAO.getByKullaniciAdiAndAktif(username,true);
+    }
+
+    @Override
     public Kullanicilar kullaniciEkle(Kullanicilar kullanicilar) {
         if (kullanicilar == null){
             throw  new IllegalArgumentException("Kullanicilar Boş");

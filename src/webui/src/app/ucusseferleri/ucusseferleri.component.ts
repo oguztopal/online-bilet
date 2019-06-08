@@ -27,7 +27,7 @@ export class UcusseferleriComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.FindHavalimani();
-    this.findSirketler();
+    this.butunSirketler();
     this.seferDurumGetir();
   }
   FindHavalimani() {
@@ -76,7 +76,7 @@ export class UcusseferleriComponent implements OnInit {
   }
 
   onRowRemoving(e) {
-    this.ucusSeferleriService.delete(e.key).subscribe(
+    this.ucusSeferleriService.delete(e.key).subscribe( //keyExpr ile id
       data => {
         this.loadData();
         this.alertifyService.warning("Silme işlemi başarıyla gerçekleşti.");
@@ -91,10 +91,6 @@ export class UcusseferleriComponent implements OnInit {
   loadData() {
     this.ucusSeferleriService.getAll().subscribe(
       data => {
-       /* this.dataSource = [];
-        for (let i = 0; i < data.length; i++) {
-        //  this.dataSource.push(data[i]);
-        }*/
        this.dataSource=data;
       },
       error => {
@@ -102,7 +98,7 @@ export class UcusseferleriComponent implements OnInit {
       }
     );
   }
-  findSirketler(){
+  butunSirketler(){
     debugger;
     this.ucusSeferleriService.getsirketler().subscribe(
       data => {
