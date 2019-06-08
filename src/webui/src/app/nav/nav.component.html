@@ -15,6 +15,10 @@
           <a class="nav-link" routerLink="hakkimizda" routerLinkActive="active"><i class="fa fa-building-o"
               aria-hidden="true"></i> Hakkımızda <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item ">
+          <a class="nav-link"  *ngIf="yetkili" routerLink="ucusseferleri" routerLinkActive="active"><i class="fa fa-building-o"
+            aria-hidden="true"></i> Ucus Seferleri <span class="sr-only">(current)</span></a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" (click)="pnrSorgula()"><i class="fa fa-search" aria-hidden="true"></i> PNR Sorgula<span
               class="sr-only">(current)</span></a>

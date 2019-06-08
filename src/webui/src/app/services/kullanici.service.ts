@@ -63,17 +63,6 @@ export class KullaniciService {
       );
         
         }
-  //       .catch(this.errorHandler);
-  //   }
-  //   registerUser(registerUser: Kullanici) {
-  //     let headers = new HttpHeaders();
-  //     headers = headers.append("Content-Type", "application/json");
-  //     return this.httpClient
-  //       .post(this.path + "registerUser", registerUser, {
-  //         headers: headers
-  //       })
-  //       .catch(this.errorHandler);
-  //   }
 
      editKullaniciLogin(kullanici) {
       return this.httpClient
@@ -88,30 +77,11 @@ export class KullaniciService {
          .catch(this.errorHandler);
      }
 
-  //   getAll(): Observable<Kullanici[]> {
-  //     return this.httpClient
-  //       .get<Kullanici[]>(this.path + "index")
-  //       .catch(this.errorHandler);
-  //   }
-
-  //   getKullaniciFirma(firmaKodu) {
-  //     return this.httpClient
-  //       .get<Kullanici[]>(this.path + "kullaniciFirma/" + firmaKodu)
-  //       .catch(this.errorHandler);
-  //   }
-
-  //   delete(kullaniciId: number) {
-  //     return this.httpClient
-  //       .delete(this.path + "delete/" + kullaniciId)
-  //       .catch(this.errorHandler);
-  //   }
-
-  //   //yetkililerin ulaşıp tüm kullanıcıların kayıtlarını düzenlediği kod
-  //   editKullanici(kullaniciModel) {
-  //     return this.httpClient
-  //       .put(this.path + "edit", kullaniciModel)
-  //       .catch(this.errorHandler);
-  //   }
+  findKullanicibyUsername(username): Observable<any> {
+    return this.httpClient
+      .get<any>("http://localhost:8088/" + "kullanicilar/username/" + username)
+      .catch(this.errorHandler);
+  }
 
   saveToken(token) {
     localStorage.setItem("token", token);
@@ -135,24 +105,6 @@ export class KullaniciService {
     );
   }
 
-  logOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("kullaniciId");
-    localStorage.removeItem("firmaKodu");
-    localStorage.removeItem("kullaniciAdi");
-    localStorage.removeItem("kullaniciDurum");
-    localStorage.removeItem("roleId");
-    localStorage.removeItem("webApiAdresi");
-    localStorage.removeItem("firmaDurum");
-    localStorage.removeItem("webApiPortu");
-    localStorage.clear();
-    this.alertifyService.error("Sistemden başarıyla çıkış yapıldı.");
-  }
-
-  loggedIn() {
-    // return localStorage.getItem("token") !== null;
-    return tokenNotExpired("token");
-  }
 
   getToken() {
     return localStorage.getItem("token");

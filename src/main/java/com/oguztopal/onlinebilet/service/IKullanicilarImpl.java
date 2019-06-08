@@ -10,4 +10,6 @@ public interface IKullanicilarImpl {
     Kullanicilar kullaniciEkle(Kullanicilar kullanicilar);
 
     Boolean kullaniciSil(Long id);
+
+    Kullanicilar kullaniciGetirByUsername(String username);
 }

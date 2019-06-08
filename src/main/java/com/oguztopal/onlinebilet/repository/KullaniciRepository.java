@@ -13,4 +13,6 @@ public interface KullaniciRepository extends JpaRepository<Kullanicilar,Long> {
 
         Kullanicilar findByKullaniciAdiAndAktif(String kullaniciAdi,Boolean aktif);
 
+        Kullanicilar getByKullaniciAdiAndAktif(String username, Boolean aktif);
+
 }

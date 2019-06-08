@@ -23,5 +23,9 @@ public interface IUcusseferleriImpl {
 
     List<Ucusseferleri> butunUcusSeferleri();
 
-    Ucusseferleri ucusseferleriguncelle(Ucusseferleri ucusseferleri);
+    Ucusseferleri ucusseferleriguncelle(Ucusseferleri ucusseferleri) throws ParseException;
+
+    Ucusseferleri ucusseferiekle(Ucusseferleri ucusseferleri) throws ParseException;
+
+    Boolean ucusSeferiPasifYap(Long seferId);
 }

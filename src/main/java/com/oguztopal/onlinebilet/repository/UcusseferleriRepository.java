@@ -18,7 +18,7 @@ public interface UcusseferleriRepository extends JpaRepository<Ucusseferleri,Lon
 
     Ucusseferleri getBySeferId(Long id);
 
-    List<Ucusseferleri> getAllBySeferIdIsNotNull();
+    List<Ucusseferleri> getAllBySeferIdIsNotNullAndAktif(Boolean aktif);
 
     List<Ucusseferleri> getUcusseferleriByGidisAndAktif (Long gidis , Long donus);
 
@@ -38,5 +38,9 @@ public interface UcusseferleriRepository extends JpaRepository<Ucusseferleri,Lon
     void ucusDurumuGuncelle(@Param("durumu") String ucusdurumlari,
                                @Param("seferId") Long seferId);
 
+
+    @Modifying(clearAutomatically = true)
+    @Query(value="update ucus_seferleri set aktif=false where sefer_id = :seferId " , nativeQuery = true)
+    void ucusSeferiIptal(@Param("seferId") Long seferId);
 
 }
