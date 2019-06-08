@@ -202,6 +202,7 @@ onFormSubmit(e){
           this.alertifyService.success("Bilet satın alma işlemi başarıyla gerçekleşti.")
         }, error => {
           this.alertifyService.error("Bilet satın alma işleminde hata meydana geldi.")
+          this.alertifyService.error(error);
         });
     } else {
       this.alertifyService.error("Lütfen tüm alanları doldurunuz.")

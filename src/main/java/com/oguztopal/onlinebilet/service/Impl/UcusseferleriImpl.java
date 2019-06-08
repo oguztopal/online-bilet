@@ -167,6 +167,7 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
                 yeni.setDonus(donus);
             }
             yeni.setBiletFiyati(ucusseferleri.getBiletFiyati());
+            yeni.setKalkisTarihi(ucusseferleri.getKalkisTarihi());
             ucusseferleriRepository.save(yeni);
             return yeni;
         }catch (Exception ex){
