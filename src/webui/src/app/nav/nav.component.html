@@ -40,7 +40,7 @@
           <a class="nav-link">Giriş Yap</a>
         </li>
 
-        <li *ngIf="!IsLoggedin()" class="nav-item">
+        <li *ngIf="!IsLoggedin()" class="nav-item"  routerLink="register" routerLinkActive="active">
           <a class="nav-link">Kaydol</a>
         </li>
       </ul>

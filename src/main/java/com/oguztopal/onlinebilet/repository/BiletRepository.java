@@ -22,6 +22,6 @@ public interface BiletRepository extends JpaRepository<Bilet,Long> {
     @Modifying
     @Query(value = "update bilet set aktif = false where bilet_id = :biletId" , nativeQuery = true)
     void biletIptal(
-            @Param("biletId") Long biletId);
+                    @Param("biletId") Long biletId);
 
 }

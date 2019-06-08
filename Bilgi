@@ -1,0 +1,21 @@
+İsterseniz git üzerinden isterseniz rardan projeyi başlatabilirsiniz. (https://github.com/oguztopal/online-bilet.git)
+1)Projenin çalıştırılması için . İlk olarak application.properties dosyası adı altında spring.jpa.hibernate.ddl-auto : create ile bir kez çalıştırılıp
+ardından update yapılmalıdır. Port 8088 olarak ayarlanmıştır. Eğer kullanılıyorsa aynı dosya altından port numarası değişilmelidir.
+Veritabanı bilgileri girilmelidir.
+
+2)Ardından Angular 4200 portunda çalıştırılmalıdır. CrossOrigin anotasyonları 4200e göre set edilmiştir.
+
+3)http://localhost:4200/register sayfasından kayıt olunmalıdır. şifreler b2crytpo ile şifrelendiğinden veritabanında kullanıcı kaydı yapılmamalıdır. Kayıt
+yapıldıktan sonra veritabanından kullanici_tipi 3 olarak set edilmedilir. (update kullanicilar set kullanici_tipi='3' where kullanici_id = 1 ) kolaylık olması açısından..
+
+4)insert into havalimanlari(havalimani_id,adres,aktif,havalimani_adi,sehir,sehir_kod,ulke) values(1,'Bursa',true,'Bursa Yenisehir Havalimani','Bursa','16','TURKEY')
+insert into havalimanlari(havalimani_id,adres,aktif,havalimani_adi,sehir,sehir_kod,ulke) values(2,'Istanbul',true,'Istanbul Sabiha Gokcen Havalimani','Istanbul','34','TURKEY')
+insert into havalimanlari(havalimani_id,adres,aktif,havalimani_adi,sehir,sehir_kod,ulke) values(3,'Antalya',true,'Antalya  Havalimani','Antalya','07','TURKEY')
+veritabanında çalıştırılmalıdır.
+
+5)insert into sirketler (sirket_id,sirket_adi) values(1,'Turk Hava Yollari')
+insert into sirketler (sirket_id,sirket_adi) values(2,'Pegasus Hava Yollari')
+insert into sirketler (sirket_id,sirket_adi) values(3,'AnadoluJET')
+insert into sirketler (sirket_id,sirket_adi) values(4,'SunExpress')
+
+6)Uçuş seferleri için navbarda Uçuş seferleri Sayfasından eklenme yapılabilir..

@@ -43,7 +43,7 @@ public class BiletImpl implements IBiletImpl {
             throw new IllegalArgumentException("Böyle bir uçuş seferi bulunmamaktadır yada henüz aktif değildir.");
         }else{
             if (ucusseferleri.getDurum()!=Ucusdurumlari.UCAK_KALKMADI){
-                throw new IllegalArgumentException("Uçak seferi için Bilet alım süresi dolmuştur. Lütfen Başka UÇak seferlerini deneyiniz.!");
+                throw new IllegalArgumentException("Uçak seferi için Bilet alım süresi dolmuştur. Uçak Durumu "+ucusseferleri.getDurum().name()+ ". Lütfen Başka UÇak seferlerini deneyiniz.!");
             }
             Bilet yenibilet = new Bilet();
             Havalimanlari havalimanlari = havalimanlariRepository.getByHavalimaniId(ucusseferleri.getGidis().getHavalimaniId());

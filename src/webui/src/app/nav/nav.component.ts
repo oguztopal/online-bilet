@@ -53,8 +53,11 @@ export class NavComponent implements OnInit {
 
   }
   findkullanici() {
+    debugger;
     this.kullaniciService.findKullanicibyUsername(JSON.parse(localStorage.getItem('currentUser')).kullaniciAdi).subscribe(
+
       data => {
+
         if (data.kullaniciTipi=="3"){
           this.yetkili = true;
         }else

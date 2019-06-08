@@ -30,7 +30,7 @@ export class BiletService {
   };
 
   post(path: string,data ): Observable<any> {
-    return this.httpClient.post(environment.API_BASE_PATH +"bilet"+ path,data, this.httpOptions).pipe(catchError(this.formatError));
+    return this.httpClient.post(environment.API_BASE_PATH +"bilet"+ path,data, this.httpOptions).pipe(catchError(this.errorHandler));
   }
 
   onr(firmaId) {
