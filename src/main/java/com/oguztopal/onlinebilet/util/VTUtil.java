@@ -75,4 +75,14 @@ public class VTUtil {
         long fark = d2.getTime() - d1.getTime();
         return TimeUnit.MILLISECONDS.toMinutes(fark);
     }
+
+    public static Date dakikaEkle(Date date , long dakika) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MINUTE,(int)dakika);
+        String format = sdf.format(cal.getTime());
+        date =  sdf.parse(format);
+        return date;
+    }
 }

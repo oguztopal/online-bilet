@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.ManyToAny;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,20 +58,6 @@ public class Bilet implements Serializable {
 
     @Column(name = "yolcu_adres")
     private String yolcuAdres;
-
-/*    @JoinColumn(name="havalimani_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private  Havalimanlari havalimanlari;
-
-    @JoinColumn(name = "havalimani_id_donus")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Havalimanlari donus;*/
-
-/*    @Column(name="fiyat")
-    private double fiyat;*/
-
-/*    @Column(name="tahmini_sure")
-    private Long tahminiSure;*/
 
     @Column(name = "aktif")
     private Boolean aktif;
