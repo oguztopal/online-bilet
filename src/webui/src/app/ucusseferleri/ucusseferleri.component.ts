@@ -33,8 +33,6 @@ export class UcusseferleriComponent implements OnInit {
   FindHavalimani() {
     this.havalimanlariService.getAll().subscribe(
       data => {
-        debugger;
-
         this.havalimanlari=data;
         console.log(this.havalimanlari)
       },
@@ -56,6 +54,8 @@ export class UcusseferleriComponent implements OnInit {
       },
       error => {
         this.alertifyService.error(error);
+        this.loadData();
+
       }
     );
   }
@@ -64,6 +64,7 @@ export class UcusseferleriComponent implements OnInit {
     this.ucusSeferleriService.edit(this.data).subscribe(
       data => {
         this.loadData();
+        this.dataSource.store().reload();
         this.alertifyService.success(
           "Sefer güncelleme işlemi başarıyla gerçekleşti."
         );
