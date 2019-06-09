@@ -48,6 +48,8 @@ public class gorevler {
             /*Date d3 = sdf.parse(date1);*/
             long fark = d2.getTime() - d1.getTime();
             long dakikaFarki = TimeUnit.MILLISECONDS.toMinutes(fark);
+            long ucussuresi = TimeUnit.MILLISECONDS.toMinutes(ucus.getVaris().getTime()-ucus.getKalkis().getTime());
+            Date varısSaati = VTUtil.dakikaEkle(d2,ucussuresi);
             //long dakikaFarki = fark / (60 * 1000) % 60;
             int saat = d1.getHours();
             if ((dakikaFarki<=60 && dakikaFarki>30) && ucus.getDurum().equals(Ucusdurumlari.UCAK_KALKMADI)){
@@ -64,8 +66,16 @@ public class gorevler {
                 }else{
                     logger.info("> ucus durumu güncellemesinde hata");
                 }
-            }if (d2.compareTo(d1)>0 && (saat>ucus.getKalkis().getHours() &&  saat<ucus.getVaris().getHours()) && sdf1.format(d1) == sdf1.format(d2) && ucus.getDurum().equals(Ucusdurumlari.KALKIS_ICIN_HAZIR)){
+            }if (d1.after(d2) && d2.before(d1) && (ucus.getDurum().equals(Ucusdurumlari.KALKIS_ICIN_HAZIR))){
                 check = ucusseferleri.durumGuncelle(Ucusdurumlari.UCUS_GERCEKLESIYOR,ucus);
+                if (check==true){
+                    logger.info("> ucus durumu güncellendi");
+                }else{
+                    logger.info("> ucus durumu güncellemesinde hata");
+                }
+            }
+            if (d1.after(varısSaati) && ucus.getDurum().equals(Ucusdurumlari.UCUS_GERCEKLESIYOR)){
+                check = ucusseferleri.durumGuncelle(Ucusdurumlari.UCUS_GERCEKLESTI,ucus);
                 if (check==true){
                     logger.info("> ucus durumu güncellendi");
                 }else{
