@@ -97,8 +97,8 @@ public class UcusseferleriImpl implements IUcusseferleriImpl {
             throw new IllegalArgumentException("İki Havalimanı Aynı seçilemez.");
         }
         Long dakikaFarki = VTUtil.dakikaFarki(ucusseferleri.getKalkisTarihi());
-        if (dakikaFarki<=60){
-            throw new IllegalArgumentException("Uçuş Eklemek için Şimdiki Zaman ile arasında minumum 3 saat olmalıdır.!!");
+        if (dakikaFarki<=180 && !ucusseferleri.getDurum().equals(Ucusdurumlari.UCAK_KALKMADI)){ //uçak durumu kalkmadı değil ise güncellenemez.
+            throw new IllegalArgumentException(ucusseferleri.getDurum().name()+" Uçuş bilgileri Güncellenemez.Uçuş Güncellemek için Şimdiki Zaman ile arasında minumum 3 saat olmalıdır.!!");
         }
         Ucusseferleri kontrol = ucusseferleriRepository.getBySeferId(ucusseferleri.getSeferId());
         if (kontrol==null){
